@@ -16,6 +16,7 @@ const maxAge = parseInt(process.env.MAX_PRICE_AGE) || 8 * 60 * 60;
 export interface EntryData {
     sku: string;
     enabled: boolean;
+	listing: boolean;
     autoprice: boolean;
     max: number;
     min: number;
@@ -31,6 +32,8 @@ export class Entry {
     name: string;
 
     enabled: boolean;
+	
+	listing: boolean;
 
     autoprice: boolean;
 
@@ -50,6 +53,7 @@ export class Entry {
         this.sku = entry.sku;
         this.name = schema.getName(SKU.fromString(entry.sku), false);
         this.enabled = entry.enabled;
+		this.listing = entry.listing;
         this.autoprice = entry.autoprice;
         this.max = entry.max;
         this.min = entry.min;
@@ -80,6 +84,7 @@ export class Entry {
         return {
             sku: this.sku,
             enabled: this.enabled,
+			listing: this.listing,
             autoprice: this.autoprice,
             max: this.max,
             min: this.min,
@@ -314,6 +319,7 @@ export default class Pricelist extends EventEmitter {
                 {
                     sku: prices[0].sku,
                     enabled: prices[0].enabled,
+					listing: prices[0].listing,
                     intent: prices[0].intent,
                     max: prices[0].max,
                     min: prices[0].min,
